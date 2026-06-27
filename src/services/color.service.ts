@@ -3,7 +3,8 @@ import type { Color } from '@/types'
 
 export async function getColors() {
   const { data } = await api.get('/Color/get-colors')
-  return (data?.data ?? data ?? []) as Color[]
+  const raw = data?.data ?? data
+  return (Array.isArray(raw) ? raw : []) as Color[]
 }
 
 // Color endpoints take their data via query params (name only).

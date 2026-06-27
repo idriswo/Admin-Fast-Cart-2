@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
 import { Spinner, LoadingState } from '@/components/ui/Spinner'
 import { SuccessModal } from '@/components/shared/SuccessModal'
+import { TagInput } from '@/components/products/TagInput'
 import {
   addProduct,
   updateProduct,
@@ -59,6 +60,8 @@ export function ProductFormPage() {
   const [subCategories, setSubCategories] = useState<SubCategory[]>([])
   const [colorId, setColorId] = useState(0)
   const [images, setImages] = useState<File[]>([])
+  const [sizes, setSizes] = useState<string[]>([])
+  const [weights, setWeights] = useState<string[]>([])
   const [showSuccess, setShowSuccess] = useState(false)
 
   const {
@@ -96,6 +99,8 @@ export function ProductFormPage() {
           discountPrice: p.discountPrice ?? 0,
         })
         setColorId(p.colorId ?? 0)
+        setSizes(p.size ? p.size.split(',').map((s) => s.trim()).filter(Boolean) : [])
+        setWeights(p.weight ? p.weight.split(',').map((s) => s.trim()).filter(Boolean) : [])
       })
       .catch(() => {})
       .finally(() => setLoading(false))
@@ -121,6 +126,8 @@ export function ProductFormPage() {
         discountPrice: values.hasDiscount
           ? Math.max(0, Number(values.discountPrice) || 0)
           : 0,
+        size: sizes.join(','),
+        weight: weights.join(','),
         images,
       }
       if (isEdit) {
@@ -279,6 +286,28 @@ export function ProductFormPage() {
               {t('form.hasDiscount')}
             </label>
           </Card>
+
+          <Card>
+            <h2 className="mb-4 font-semibold text-ink">{t('form.options')}</h2>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label className={fieldLabel}>{t('form.size')}</label>
+                <TagInput
+                  values={sizes}
+                  onChange={setSizes}
+                  placeholder={t('form.addValue')}
+                />
+              </div>
+              <div>
+                <label className={fieldLabel}>{t('form.weight')}</label>
+                <TagInput
+                  values={weights}
+                  onChange={setWeights}
+                  placeholder={t('form.addValue')}
+                />
+              </div>
+            </div>
+          </Card>
         </div>
 
         {/* Right column */}
@@ -383,6 +412,8 @@ export function ProductFormPage() {
           })
           setColorId(0)
           setImages([])
+          setSizes([])
+          setWeights([])
           setShowSuccess(false)
         }}
         onSecondary={() => navigate('/products')}

@@ -11,7 +11,8 @@ interface ProductQuery {
 export async function getProducts(params: ProductQuery = {}) {
   const { data } = await api.get('/Product/get-products', { params })
   // Shape: { pageNumber, pageSize, totalPage, totalRecord, data: { products: [...] } }
-  const products: Product[] = data?.data?.products ?? data?.products ?? []
+  const raw = data?.data?.products ?? data?.products ?? data?.data ?? data
+  const products: Product[] = Array.isArray(raw) ? raw : []
   const totalRecords: number =
     data?.totalRecord ?? data?.totalRecords ?? products.length
   return { products, totalRecords }
@@ -36,6 +37,8 @@ export interface ProductPayload {
   subCategoryId: number
   hasDiscount: boolean
   discountPrice?: number
+  size?: string
+  weight?: string
   images: File[]
 }
 
@@ -52,6 +55,8 @@ export async function addProduct(p: ProductPayload) {
   form.append('SubCategoryId', String(p.subCategoryId))
   form.append('HasDiscount', String(p.hasDiscount))
   form.append('DiscountPrice', String(p.discountPrice ?? 0))
+  if (p.size) form.append('Size', p.size)
+  if (p.weight) form.append('Weight', p.weight)
   p.images.forEach((file) => form.append('Images', file))
 
   // Let axios set Content-Type (incl. the multipart boundary) automatically.
@@ -74,6 +79,8 @@ export async function updateProduct(p: ProductPayload) {
       SubCategoryId: p.subCategoryId,
       HasDiscount: p.hasDiscount,
       DiscountPrice: p.discountPrice ?? 0,
+      Size: p.size || undefined,
+      Weight: p.weight || undefined,
     },
   })
   return data

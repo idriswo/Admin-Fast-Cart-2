@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Plus, Pencil, Trash2 } from 'lucide-react'
+import { Plus, Pencil, Trash2, ShoppingBag } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { PageHeader } from '@/components/shared/PageHeader'
@@ -75,6 +75,30 @@ export function ProductsPage() {
   }
 
   if (loading) return <LoadingState />
+
+  // Rich empty state (mockup Products-1) when there are no products at all.
+  if (products.length === 0) {
+    return (
+      <div data-aos="fade-up">
+        <PageHeader title={t('products.title')} />
+        <div className="flex flex-col items-center justify-center rounded-xl border border-line bg-card py-24 text-center">
+          <ShoppingBag className="h-14 w-14 text-gray-300" />
+          <h2 className="mt-4 text-lg font-semibold text-ink">
+            {t('products.emptyTitle')}
+          </h2>
+          <p className="mt-1 max-w-sm text-sm text-muted">
+            {t('products.emptyHint')}
+          </p>
+          <Button
+            className="mt-5"
+            onClick={() => navigate('/products/new')}
+          >
+            <Plus className="h-4 w-4" /> {t('common.addProduct')}
+          </Button>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div data-aos="fade-up">

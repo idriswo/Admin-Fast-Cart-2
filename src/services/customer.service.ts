@@ -16,7 +16,8 @@ export async function getCustomers(params: CustomerQuery = {}) {
     },
   })
   // Shape: { pageNumber, pageSize, totalPage, totalRecord, data: [...] }
-  const customers: UserProfile[] = data?.data ?? data ?? []
+  const raw = data?.data ?? data
+  const customers: UserProfile[] = Array.isArray(raw) ? raw : []
   const totalRecords: number = data?.totalRecord ?? customers.length
   return { customers, totalRecords }
 }

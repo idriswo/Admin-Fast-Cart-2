@@ -58,7 +58,9 @@
     "price": "Цена",
     "action": "Действие",
     "inStock": "в наличии",
-    "outOfStock": "Нет в наличии"
+    "outOfStock": "Нет в наличии",
+    "emptyTitle": "Добавьте новые товары",
+    "emptyHint": "Начните продажи, добавив свои товары."
   },
   "orders": {
     "title": "Заказы",
@@ -106,7 +108,11 @@
     "uploadFormats": "SVG, JPG, PNG (макс. 900×400)",
     "successAdd": "Успешно добавлено",
     "successAddMsg": "Хотите добавить новый товар в магазин?",
-    "goToProducts": "К товарам"
+    "goToProducts": "К товарам",
+    "options": "Опции",
+    "size": "Размер",
+    "weight": "Вес",
+    "addValue": "Добавьте значение"
   },
   "confirm": {
     "deleteItems": "Удалить элементы",

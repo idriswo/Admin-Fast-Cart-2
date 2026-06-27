@@ -3,7 +3,8 @@ import type { Brand } from '@/types'
 
 export async function getBrands() {
   const { data } = await api.get('/Brand/get-brands')
-  return (data?.data ?? data ?? []) as Brand[]
+  const raw = data?.data ?? data
+  return (Array.isArray(raw) ? raw : []) as Brand[]
 }
 
 // Brand endpoints take their data via query params (no body, no image).

@@ -3,7 +3,8 @@ import type { SubCategory } from '@/types'
 
 export async function getSubCategories() {
   const { data } = await api.get('/SubCategory/get-sub-category')
-  return (data?.data ?? data ?? []) as SubCategory[]
+  const raw = data?.data ?? data
+  return (Array.isArray(raw) ? raw : []) as SubCategory[]
 }
 
 // SubCategory endpoints take their data via query params (name + parent category).

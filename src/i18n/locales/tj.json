@@ -58,7 +58,9 @@
     "price": "Нарх",
     "action": "Амал",
     "inStock": "дар анбор",
-    "outOfStock": "Нест"
+    "outOfStock": "Нест",
+    "emptyTitle": "Маҳсулоти нав илова кунед",
+    "emptyHint": "Бо илова кардани маҳсулот ба фурӯш оғоз кунед."
   },
   "orders": {
     "title": "Фармоишҳо",
@@ -106,7 +108,11 @@
     "uploadFormats": "SVG, JPG, PNG (ҳадди аксар 900×400)",
     "successAdd": "Бомуваффақият илова шуд",
     "successAddMsg": "Мехоҳед маҳсулоти нав ба мағоза илова кунед?",
-    "goToProducts": "Ба маҳсулот"
+    "goToProducts": "Ба маҳсулот",
+    "options": "Имконот",
+    "size": "Андоза",
+    "weight": "Вазн",
+    "addValue": "Қимат илова кунед"
   },
   "confirm": {
     "deleteItems": "Нест кардани ашё",

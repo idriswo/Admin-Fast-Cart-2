@@ -34,6 +34,8 @@ export interface Product {
   color?: string
   subCategoryId?: number
   hasDiscount?: boolean
+  size?: string
+  weight?: string
   image?: string
 }
 

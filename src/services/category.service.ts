@@ -3,7 +3,8 @@ import type { Category } from '@/types'
 
 export async function getCategories() {
   const { data } = await api.get('/Category/get-categories')
-  return (data?.data ?? data ?? []) as Category[]
+  const raw = data?.data ?? data
+  return (Array.isArray(raw) ? raw : []) as Category[]
 }
 
 // Category endpoints use multipart/form-data; CategoryImage (file) is required.

@@ -58,7 +58,9 @@
     "price": "Price",
     "action": "Action",
     "inStock": "in stock",
-    "outOfStock": "Out of Stock"
+    "outOfStock": "Out of Stock",
+    "emptyTitle": "Add new products",
+    "emptyHint": "Start making sales by adding your products."
   },
   "orders": {
     "title": "Orders",
@@ -106,7 +108,11 @@
     "uploadFormats": "SVG, JPG, PNG (max 900×400)",
     "successAdd": "Successfully add",
     "successAddMsg": "Do you want to add new product to your store?",
-    "goToProducts": "Go to products"
+    "goToProducts": "Go to products",
+    "options": "Options",
+    "size": "Size",
+    "weight": "Weight",
+    "addValue": "Add a value"
   },
   "confirm": {
     "deleteItems": "Delete Items",
