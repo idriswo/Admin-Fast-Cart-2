@@ -81,7 +81,19 @@
     "email": "Email",
     "phone": "Phone",
     "role": "Role",
-    "searchUsername": "Search by username..."
+    "searchUsername": "Search by username...",
+    "changeRole": "Change role",
+    "selectRole": "Select a role"
+  },
+  "profile": {
+    "title": "Profile",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "phone": "Phone",
+    "dob": "Date of birth",
+    "photo": "Photo",
+    "updated": "Profile updated"
   },
   "form": {
     "productName": "Product name",

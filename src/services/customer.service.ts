@@ -1,5 +1,5 @@
 import { api } from './api'
-import type { UserProfile } from '@/types'
+import type { UserProfile, UserRole } from '@/types'
 
 interface CustomerQuery {
   pageNumber?: number
@@ -34,4 +34,40 @@ export async function deleteCustomer(id: string) {
     params: { id },
   })
   return data
+}
+
+export async function getUserRoles() {
+  const { data } = await api.get('/UserProfile/get-user-roles')
+  const raw = data?.data ?? data
+  return (Array.isArray(raw) ? raw : []) as UserRole[]
+}
+
+export async function addRoleToUser(userId: string, roleId: string) {
+  const { data } = await api.post('/UserProfile/addrole-from-user', null, {
+    params: { UserId: userId, RoleId: roleId },
+  })
+  return data
+}
+
+export async function removeRoleFromUser(userId: string, roleId: string) {
+  const { data } = await api.delete('/UserProfile/remove-role-from-user', {
+    params: { UserId: userId, RoleId: roleId },
+  })
+  return data
+}
+
+/** Replace a user's roles with a single new role (remove old, add new). */
+export async function changeUserRole(
+  userId: string,
+  newRoleId: string,
+  currentRoleIds: string[]
+) {
+  for (const rid of currentRoleIds) {
+    if (rid !== newRoleId) {
+      await removeRoleFromUser(userId, rid).catch(() => {})
+    }
+  }
+  if (!currentRoleIds.includes(newRoleId)) {
+    await addRoleToUser(userId, newRoleId)
+  }
 }

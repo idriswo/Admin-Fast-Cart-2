@@ -81,7 +81,19 @@
     "email": "Email",
     "phone": "Телефон",
     "role": "Роль",
-    "searchUsername": "Поиск по имени пользователя..."
+    "searchUsername": "Поиск по имени пользователя...",
+    "changeRole": "Изменить роль",
+    "selectRole": "Выберите роль"
+  },
+  "profile": {
+    "title": "Профиль",
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "email": "Email",
+    "phone": "Телефон",
+    "dob": "Дата рождения",
+    "photo": "Фото",
+    "updated": "Профиль обновлён"
   },
   "form": {
     "productName": "Название товара",

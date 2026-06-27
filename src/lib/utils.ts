@@ -15,6 +15,17 @@ export function formatPrice(value: number | undefined | null) {
   }).format(value)
 }
 
+/** Decode a JWT payload (no verification) and return its claims. */
+export function decodeJwt(token: string): Record<string, unknown> | null {
+  try {
+    const payload = token.split('.')[1]
+    const json = atob(payload.replace(/-/g, '+').replace(/_/g, '/'))
+    return JSON.parse(json)
+  } catch {
+    return null
+  }
+}
+
 /** Build an absolute image URL from an API-relative path. */
 export function imageUrl(path?: string | null) {
   if (!path) return ''

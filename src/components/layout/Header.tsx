@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Search, Bell, ChevronDown, LogOut, Sun, Moon, Globe } from 'lucide-react'
+import { Search, Bell, ChevronDown, LogOut, Sun, Moon, Globe, UserCircle } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '@/store/auth'
@@ -89,6 +89,15 @@ export function Header() {
           </button>
           {menuOpen && (
             <div className="absolute right-0 top-12 z-20 w-44 rounded-lg border border-line bg-card py-1 shadow-lg">
+              <button
+                onClick={() => {
+                  setMenuOpen(false)
+                  navigate('/profile')
+                }}
+                className="flex w-full items-center gap-2 px-4 py-2 text-sm text-ink hover:bg-surface"
+              >
+                <UserCircle className="h-4 w-4" /> {t('profile.title')}
+              </button>
               <button
                 onClick={() => {
                   logout()

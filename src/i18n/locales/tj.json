@@ -81,7 +81,19 @@
     "email": "Email",
     "phone": "Телефон",
     "role": "Нақш",
-    "searchUsername": "Ҷустуҷӯ аз рӯи номи корбар..."
+    "searchUsername": "Ҷустуҷӯ аз рӯи номи корбар...",
+    "changeRole": "Иваз кардани нақш",
+    "selectRole": "Нақшро интихоб кунед"
+  },
+  "profile": {
+    "title": "Профил",
+    "firstName": "Ном",
+    "lastName": "Насаб",
+    "email": "Email",
+    "phone": "Телефон",
+    "dob": "Санаи таваллуд",
+    "photo": "Сурат",
+    "updated": "Профил навсозӣ шуд"
   },
   "form": {
     "productName": "Номи маҳсулот",

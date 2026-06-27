@@ -1,14 +1,22 @@
 import { useEffect, useState } from 'react'
-import { Trash2, User, Search } from 'lucide-react'
+import { Trash2, User, Search, ShieldCheck } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { PageHeader } from '@/components/shared/PageHeader'
 import { Pagination } from '@/components/shared/Pagination'
 import { ConfirmModal } from '@/components/shared/ConfirmModal'
+import { Modal } from '@/components/ui/Modal'
+import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
-import { LoadingState } from '@/components/ui/Spinner'
+import { LoadingState, Spinner } from '@/components/ui/Spinner'
 import { imageUrl } from '@/lib/utils'
-import { getCustomers, deleteCustomer } from '@/services/customer.service'
-import type { UserProfile } from '@/types'
+import {
+  getCustomers,
+  deleteCustomer,
+  getUserRoles,
+  addRoleToUser,
+  removeRoleFromUser,
+} from '@/services/customer.service'
+import type { UserProfile, UserRole } from '@/types'
 
 export function CustomersPage() {
   const { t } = useTranslation()
@@ -21,6 +29,50 @@ export function CustomersPage() {
   const [debounced, setDebounced] = useState('')
   const [toDelete, setToDelete] = useState<UserProfile | null>(null)
   const [deleting, setDeleting] = useState(false)
+
+  // Role management
+  const [roles, setRoles] = useState<UserRole[]>([])
+  const [roleUser, setRoleUser] = useState<UserProfile | null>(null)
+  const [selectedRoleIds, setSelectedRoleIds] = useState<Set<string>>(new Set())
+  const [savingRole, setSavingRole] = useState(false)
+
+  useEffect(() => {
+    getUserRoles()
+      .then(setRoles)
+      .catch(() => setRoles([]))
+  }, [])
+
+  const openRoleModal = (c: UserProfile) => {
+    setRoleUser(c)
+    setSelectedRoleIds(new Set((c.userRoles ?? []).map((r) => r.id)))
+  }
+
+  const toggleRole = (id: string) =>
+    setSelectedRoleIds((s) => {
+      const next = new Set(s)
+      next.has(id) ? next.delete(id) : next.add(id)
+      return next
+    })
+
+  const saveRole = async () => {
+    if (!roleUser) return
+    setSavingRole(true)
+    try {
+      const current = new Set((roleUser.userRoles ?? []).map((r) => r.id))
+      // Add newly checked roles, remove unchecked ones.
+      for (const id of selectedRoleIds) {
+        if (!current.has(id)) await addRoleToUser(roleUser.userId, id).catch(() => {})
+      }
+      for (const id of current) {
+        if (!selectedRoleIds.has(id))
+          await removeRoleFromUser(roleUser.userId, id).catch(() => {})
+      }
+      setRoleUser(null)
+      load()
+    } finally {
+      setSavingRole(false)
+    }
+  }
 
   // Debounce the search box so we don't hit the API on every keystroke.
   useEffect(() => {
@@ -37,6 +89,17 @@ export function CustomersPage() {
       .then((res) => {
         setCustomers(res.customers)
         setTotal(res.totalRecords)
+        // Grow the role pool with any roles seen on these users (e.g. SuperAdmin),
+        // so every user's select offers the full set of roles.
+        setRoles((prev) => {
+          const merged = [...prev]
+          for (const c of res.customers) {
+            for (const r of c.userRoles ?? []) {
+              if (r.id && !merged.some((m) => m.id === r.id)) merged.push(r)
+            }
+          }
+          return merged
+        })
       })
       .catch(() => setCustomers([]))
       .finally(() => setLoading(false))
@@ -147,12 +210,21 @@ export function CustomersPage() {
                       )}
                     </td>
                     <td className="px-2 py-3">
-                      <button
-                        onClick={() => setToDelete(c)}
-                        className="text-danger"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </button>
+                      <div className="flex items-center gap-3">
+                        <button
+                          onClick={() => openRoleModal(c)}
+                          className="text-brand"
+                          title={t('customers.changeRole')}
+                        >
+                          <ShieldCheck className="h-4 w-4" />
+                        </button>
+                        <button
+                          onClick={() => setToDelete(c)}
+                          className="text-danger"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 )
@@ -184,6 +256,56 @@ export function CustomersPage() {
         onCancel={() => setToDelete(null)}
         onConfirm={confirmDelete}
       />
+
+      <Modal
+        open={!!roleUser}
+        onClose={() => setRoleUser(null)}
+        title={t('customers.changeRole')}
+        footer={
+          <>
+            <Button variant="outline" onClick={() => setRoleUser(null)}>
+              {t('common.cancel')}
+            </Button>
+            <Button onClick={saveRole} disabled={savingRole}>
+              {savingRole ? <Spinner className="text-white" /> : t('common.save')}
+            </Button>
+          </>
+        }
+      >
+        <div className="text-ink">
+          <p className="mb-3 text-sm font-medium">
+            {roleUser?.userName ||
+              [roleUser?.firstName, roleUser?.lastName]
+                .filter(Boolean)
+                .join(' ')}
+          </p>
+          <p className="mb-2 text-xs text-muted">{t('customers.selectRole')}</p>
+          <div className="space-y-2">
+            {(() => {
+              // Merge API roles with the user's current roles so all roles
+              // (incl. SuperAdmin) can be added or removed.
+              const merged = [...roles]
+              for (const r of roleUser?.userRoles ?? []) {
+                if (!merged.some((m) => m.id === r.id)) merged.push(r)
+              }
+              return merged.map((r) => (
+                <label
+                  key={r.id}
+                  className="flex cursor-pointer items-center gap-3 rounded-lg border border-line px-3 py-2.5"
+                >
+                  <input
+                    type="checkbox"
+                    checked={selectedRoleIds.has(r.id)}
+                    onChange={() => toggleRole(r.id)}
+                    className="h-4 w-4"
+                  />
+                  <span className="text-sm">{r.name}</span>
+                </label>
+              ))
+            })()}
+          </div>
+        </div>
+      </Modal>
     </div>
   )
 }
