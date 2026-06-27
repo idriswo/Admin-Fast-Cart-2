@@ -1,0 +1,119 @@
+{
+  "nav": {
+    "dashboard": "Дашборд",
+    "orders": "Фармоишҳо",
+    "products": "Маҳсулот",
+    "other": "Дигар",
+    "customers": "Муштариён"
+  },
+  "common": {
+    "search": "Ҷустуҷӯ...",
+    "addProduct": "Илова кардани маҳсулот",
+    "addOrder": "Илова кардани фармоиш",
+    "addNew": "Илова кардани нав",
+    "save": "Нигоҳ доштан",
+    "cancel": "Бекор кардан",
+    "delete": "Нест кардан",
+    "edit": "Таҳрир",
+    "logout": "Баромадан",
+    "results": "Натиҷа",
+    "show": "Намоиш",
+    "perPage": "дар саҳифа",
+    "filter": "Филтр",
+    "newest": "Навтарин",
+    "oldest": "Кӯҳнатарин",
+    "loading": "Бор шуда истодааст...",
+    "notFound": "Чизе ёфт нашуд.",
+    "selectPlaceholder": "Интихоб кунед"
+  },
+  "login": {
+    "welcome": "Хуш омадед ба панели админ",
+    "title": "Воридшавӣ",
+    "username": "Номи корбар",
+    "password": "Парол",
+    "forgot": "Паролро фаромӯш кардед?",
+    "submit": "Ворид шудан",
+    "success": "Хуш омадед!"
+  },
+  "dashboard": {
+    "title": "Дашборд",
+    "products": "Маҳсулот",
+    "customers": "Муштариён",
+    "categories": "Категорияҳо",
+    "brands": "Брендҳо",
+    "productsByCategory": "Маҳсулот аз рӯи категория",
+    "inventory": "Захира",
+    "recentCustomers": "Муштариёни охирин",
+    "topProducts": "Маҳсулоти беҳтарин",
+    "name": "Ном",
+    "email": "Email",
+    "role": "Нақш",
+    "noData": "Маълумот нест"
+  },
+  "products": {
+    "title": "Маҳсулот",
+    "product": "Маҳсулот",
+    "inventory": "Захира",
+    "category": "Категория",
+    "price": "Нарх",
+    "action": "Амал",
+    "inStock": "дар анбор",
+    "outOfStock": "Нест"
+  },
+  "orders": {
+    "title": "Фармоишҳо",
+    "empty": "Ҳоло фармоиш нест",
+    "emptyHint": "Фармоишҳо дар ин ҷо намоиш дода мешаванд."
+  },
+  "categories": {
+    "categories": "Категорияҳо",
+    "brands": "Брендҳо",
+    "subCategories": "Зеркатегорияҳо",
+    "colors": "Рангҳо",
+    "banners": "Баннерҳо",
+    "bannersPlaceholder": "Баннерҳо (API дастрас нест — placeholder)"
+  },
+  "customers": {
+    "title": "Муштариён",
+    "customer": "Муштарӣ",
+    "email": "Email",
+    "phone": "Телефон",
+    "role": "Нақш",
+    "searchUsername": "Ҷустуҷӯ аз рӯи номи корбар..."
+  },
+  "form": {
+    "productName": "Номи маҳсулот",
+    "code": "Код",
+    "price": "Нарх",
+    "count": "Шумора",
+    "brand": "Бренд",
+    "color": "Ранг",
+    "subCategory": "Зеркатегория",
+    "description": "Тавсиф",
+    "descriptionPlaceholder": "Тавсифи маҳсулот...",
+    "hasDiscount": "Тахфиф дорад",
+    "discountPrice": "Нархи тахфиф",
+    "images": "Расмҳо",
+    "addProductTitle": "Илова кардани маҳсулоти нав",
+    "editProductTitle": "Таҳрири маҳсулот",
+    "categoryName": "Номи категория",
+    "brandName": "Номи бренд",
+    "imageRequired": "Лутфан расм интихоб кунед (ҳатмӣ).",
+    "imageHintEdit": "Расм ҳангоми таҳрир тағйир намеёбад.",
+    "information": "Маълумот",
+    "colour": "Ранг",
+    "uploadHint": "Зер кунед барои боргузорӣ ё файлро кашед",
+    "uploadFormats": "SVG, JPG, PNG (ҳадди аксар 900×400)",
+    "successAdd": "Бомуваффақият илова шуд",
+    "successAddMsg": "Мехоҳед маҳсулоти нав ба мағоза илова кунед?",
+    "goToProducts": "Ба маҳсулот"
+  },
+  "confirm": {
+    "deleteItems": "Нест кардани ашё",
+    "deleteItemsMsg": "Шумо мутмаин ҳастед, ки {{count}} ашёро нест кунед?",
+    "deleteCustomer": "Нест кардани муштарӣ",
+    "deleteCustomerMsg": "Шумо мутмаин ҳастед, ки ин муштариро нест кунед?",
+    "deleteItem": "Нест кардани ашё",
+    "deleteItemMsg": "Шумо мутмаин ҳастед, ки \"{{name}}\"-ро нест кунед?"
+  }
+}

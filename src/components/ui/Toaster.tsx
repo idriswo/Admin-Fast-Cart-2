@@ -18,7 +18,7 @@ export function Toaster() {
         <div
           key={t.id}
           className={cn(
-            'flex items-start gap-3 rounded-lg border bg-white p-3.5 shadow-md',
+            'flex items-start gap-3 rounded-lg border bg-card p-3.5 shadow-md',
             t.type === 'success' && 'border-success/30',
             t.type === 'error' && 'border-danger/30',
             t.type === 'info' && 'border-brand/30'

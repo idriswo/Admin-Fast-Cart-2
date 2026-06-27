@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Plus, Pencil, Trash2 } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import { PageHeader } from '@/components/shared/PageHeader'
 import { TableToolbar } from '@/components/shared/TableToolbar'
 import { Pagination } from '@/components/shared/Pagination'
@@ -7,7 +9,6 @@ import { ConfirmModal } from '@/components/shared/ConfirmModal'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { LoadingState } from '@/components/ui/Spinner'
-import { ProductFormModal } from '@/components/products/ProductFormModal'
 import { getProducts, deleteProduct } from '@/services/product.service'
 import { formatPrice, imageUrl } from '@/lib/utils'
 import type { Product } from '@/types'
@@ -15,13 +16,13 @@ import type { Product } from '@/types'
 const PAGE_SIZE = 8
 
 export function ProductsPage() {
+  const { t } = useTranslation()
+  const navigate = useNavigate()
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [page, setPage] = useState(1)
   const [selected, setSelected] = useState<Set<number>>(new Set())
-  const [editing, setEditing] = useState<Product | null>(null)
-  const [formOpen, setFormOpen] = useState(false)
   const [toDelete, setToDelete] = useState<Product[] | null>(null)
   const [deleting, setDeleting] = useState(false)
 
@@ -78,15 +79,10 @@ export function ProductsPage() {
   return (
     <div data-aos="fade-up">
       <PageHeader
-        title="Products"
+        title={t('products.title')}
         action={
-          <Button
-            onClick={() => {
-              setEditing(null)
-              setFormOpen(true)
-            }}
-          >
-            <Plus className="h-4 w-4" /> Add product
+          <Button onClick={() => navigate('/products/new')}>
+            <Plus className="h-4 w-4" /> {t('common.addProduct')}
           </Button>
         }
       />
@@ -103,7 +99,7 @@ export function ProductsPage() {
         }
       />
 
-      <div className="overflow-x-auto rounded-xl border border-line bg-white">
+      <div className="overflow-x-auto rounded-xl border border-line bg-card">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-line text-left text-muted">
@@ -116,11 +112,11 @@ export function ProductsPage() {
                   onChange={toggleAll}
                 />
               </th>
-              <th className="px-2 py-3 font-medium">Product</th>
-              <th className="px-2 py-3 font-medium">Inventory</th>
-              <th className="px-2 py-3 font-medium">Category</th>
-              <th className="px-2 py-3 font-medium">Price</th>
-              <th className="px-2 py-3 font-medium">Action</th>
+              <th className="px-2 py-3 font-medium">{t('products.product')}</th>
+              <th className="px-2 py-3 font-medium">{t('products.inventory')}</th>
+              <th className="px-2 py-3 font-medium">{t('products.category')}</th>
+              <th className="px-2 py-3 font-medium">{t('products.price')}</th>
+              <th className="px-2 py-3 font-medium">{t('products.action')}</th>
             </tr>
           </thead>
           <tbody>
@@ -152,9 +148,11 @@ export function ProductsPage() {
                 </td>
                 <td className="px-2 py-3">
                   {p.quantity && p.quantity > 0 ? (
-                    <span className="text-ink">{p.quantity} in stock</span>
+                    <span className="text-ink">
+                      {p.quantity} {t('products.inStock')}
+                    </span>
                   ) : (
-                    <Badge tone="neutral">Out of Stock</Badge>
+                    <Badge tone="neutral">{t('products.outOfStock')}</Badge>
                   )}
                 </td>
                 <td className="px-2 py-3 text-muted">
@@ -164,10 +162,7 @@ export function ProductsPage() {
                 <td className="px-2 py-3">
                   <div className="flex items-center gap-3">
                     <button
-                      onClick={() => {
-                        setEditing(p)
-                        setFormOpen(true)
-                      }}
+                      onClick={() => navigate(`/products/${p.id}/edit`)}
                       className="text-brand"
                     >
                       <Pencil className="h-4 w-4" />
@@ -185,7 +180,7 @@ export function ProductsPage() {
             {pageItems.length === 0 && (
               <tr>
                 <td colSpan={6} className="px-4 py-10 text-center text-muted">
-                  Маҳсулот ёфт нашуд.
+                  {t('common.notFound')}
                 </td>
               </tr>
             )}
@@ -200,17 +195,10 @@ export function ProductsPage() {
         onChange={setPage}
       />
 
-      <ProductFormModal
-        open={formOpen}
-        product={editing}
-        onClose={() => setFormOpen(false)}
-        onSaved={load}
-      />
-
       <ConfirmModal
         open={!!toDelete}
-        title="Delete Items"
-        message={`Are you sure you want to delete ${toDelete?.length ?? 0} selected item(s)?`}
+        title={t('confirm.deleteItems')}
+        message={t('confirm.deleteItemsMsg', { count: toDelete?.length ?? 0 })}
         loading={deleting}
         onCancel={() => setToDelete(null)}
         onConfirm={confirmDelete}

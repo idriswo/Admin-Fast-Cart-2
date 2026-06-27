@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Package, Users, FolderTree, Tag, User } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { LoadingState } from '@/components/ui/Spinner'
@@ -23,6 +24,7 @@ interface Stats {
 }
 
 export function DashboardPage() {
+  const { t } = useTranslation()
   const [stats, setStats] = useState<Stats | null>(null)
 
   useEffect(() => {
@@ -72,15 +74,15 @@ export function DashboardPage() {
   if (!stats) return <LoadingState />
 
   const cards = [
-    { label: 'Products', value: stats.products, icon: Package, tint: 'bg-blue-100 text-brand' },
-    { label: 'Customers', value: stats.customers, icon: Users, tint: 'bg-emerald-100 text-emerald-500' },
-    { label: 'Categories', value: stats.categories, icon: FolderTree, tint: 'bg-amber-100 text-amber-500' },
-    { label: 'Brands', value: stats.brands, icon: Tag, tint: 'bg-rose-100 text-rose-500' },
+    { label: t('dashboard.products'), value: stats.products, icon: Package, tint: 'bg-blue-100 text-brand' },
+    { label: t('dashboard.customers'), value: stats.customers, icon: Users, tint: 'bg-emerald-100 text-emerald-500' },
+    { label: t('dashboard.categories'), value: stats.categories, icon: FolderTree, tint: 'bg-amber-100 text-amber-500' },
+    { label: t('dashboard.brands'), value: stats.brands, icon: Tag, tint: 'bg-rose-100 text-rose-500' },
   ]
 
   return (
     <div className="space-y-6" data-aos="fade-up">
-      <h1 className="text-2xl font-bold text-ink">Dashboard</h1>
+      <h1 className="text-2xl font-bold text-ink">{t('dashboard.title')}</h1>
 
       {/* Real stat cards */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -102,22 +104,26 @@ export function DashboardPage() {
         <div className="space-y-6 lg:col-span-2">
           <Card>
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="font-semibold text-ink">Products by Category</h2>
+              <h2 className="font-semibold text-ink">
+                {t('dashboard.productsByCategory')}
+              </h2>
               <span className="text-sm text-muted">
-                Захира: {formatPrice(stats.inventoryValue)}
+                {t('dashboard.inventory')}: {formatPrice(stats.inventoryValue)}
               </span>
             </div>
             <CategoryBarChart data={stats.byCategory} />
           </Card>
 
           <Card>
-            <h2 className="mb-4 font-semibold text-ink">Recent Customers</h2>
+            <h2 className="mb-4 font-semibold text-ink">
+              {t('dashboard.recentCustomers')}
+            </h2>
             <table className="w-full text-sm">
               <thead>
                 <tr className="text-left text-muted">
-                  <th className="pb-3 font-medium">Name</th>
-                  <th className="pb-3 font-medium">Email</th>
-                  <th className="pb-3 font-medium">Role</th>
+                  <th className="pb-3 font-medium">{t('dashboard.name')}</th>
+                  <th className="pb-3 font-medium">{t('dashboard.email')}</th>
+                  <th className="pb-3 font-medium">{t('dashboard.role')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -159,7 +165,9 @@ export function DashboardPage() {
         {/* Right: top priced products (real) */}
         <Card className="h-fit">
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="font-semibold text-ink">Top products</h2>
+            <h2 className="font-semibold text-ink">
+              {t('dashboard.topProducts')}
+            </h2>
           </div>
           <div className="space-y-4">
             {stats.topProducts.length === 0 && (

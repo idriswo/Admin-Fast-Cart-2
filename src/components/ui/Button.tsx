@@ -9,10 +9,10 @@ const button = cva(
       variant: {
         primary: 'bg-brand text-white hover:bg-brand-hover',
         outline:
-          'border border-line bg-white text-ink hover:bg-surface',
+          'border border-line bg-card text-ink hover:bg-surface',
         danger: 'bg-danger text-white hover:bg-red-600',
         'danger-outline':
-          'border border-danger text-danger bg-white hover:bg-red-50',
+          'border border-danger text-danger bg-card hover:bg-red-50',
         ghost: 'text-ink hover:bg-surface',
       },
       size: {

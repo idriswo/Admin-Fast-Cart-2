@@ -1,4 +1,5 @@
 import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
 
 interface PaginationProps {
@@ -9,10 +10,11 @@ interface PaginationProps {
 }
 
 export function Pagination({ page, pageCount, total, onChange }: PaginationProps) {
+  const { t } = useTranslation()
   if (pageCount <= 1) {
     return (
       <div className="flex justify-end pt-4 text-sm text-muted">
-        {total} Results
+        {total} {t('common.results')}
       </div>
     )
   }
@@ -60,7 +62,7 @@ export function Pagination({ page, pageCount, total, onChange }: PaginationProps
           <ArrowRight className="h-4 w-4" />
         </button>
       </div>
-      <span className="text-sm text-muted">{total} Results</span>
+      <span className="text-sm text-muted">{total} {t('common.results')}</span>
     </div>
   )
 }

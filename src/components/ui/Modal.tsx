@@ -26,7 +26,7 @@ export function Modal({ open, onClose, title, children, footer }: ModalProps) {
       onClick={onClose}
     >
       <div
-        className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl"
+        className="w-full max-w-md rounded-xl bg-card p-6 shadow-xl"
         onClick={(e) => e.stopPropagation()}
         data-aos="zoom-in"
       >

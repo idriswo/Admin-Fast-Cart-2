@@ -1,4 +1,13 @@
-// Pure-SVG horizontal bar chart — products grouped by category (real data).
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts'
+
 interface Bar {
   label: string
   value: number
@@ -8,26 +17,47 @@ export function CategoryBarChart({ data }: { data: Bar[] }) {
   if (data.length === 0) {
     return <p className="py-8 text-center text-sm text-muted">Маълумот нест</p>
   }
-  const max = Math.max(...data.map((d) => d.value), 1)
 
   return (
-    <div className="space-y-3">
-      {data.map((d) => (
-        <div key={d.label} className="flex items-center gap-3">
-          <span className="w-28 shrink-0 truncate text-sm text-muted">
-            {d.label}
-          </span>
-          <div className="h-3 flex-1 overflow-hidden rounded-full bg-surface">
-            <div
-              className="h-full rounded-full bg-brand transition-all"
-              style={{ width: `${(d.value / max) * 100}%` }}
-            />
-          </div>
-          <span className="w-8 shrink-0 text-right text-sm font-medium text-ink">
-            {d.value}
-          </span>
-        </div>
-      ))}
-    </div>
+    <ResponsiveContainer width="100%" height={260}>
+      <AreaChart data={data} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
+        <defs>
+          <linearGradient id="catFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#2563eb" stopOpacity={0.35} />
+            <stop offset="100%" stopColor="#2563eb" stopOpacity={0} />
+          </linearGradient>
+        </defs>
+        <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
+        <XAxis
+          dataKey="label"
+          tick={{ fontSize: 12, fill: '#94a3b8' }}
+          tickLine={false}
+          axisLine={false}
+        />
+        <YAxis
+          allowDecimals={false}
+          tick={{ fontSize: 12, fill: '#94a3b8' }}
+          tickLine={false}
+          axisLine={false}
+          width={32}
+        />
+        <Tooltip
+          contentStyle={{
+            borderRadius: 8,
+            border: '1px solid #e5e7eb',
+            fontSize: 12,
+          }}
+        />
+        <Area
+          type="monotone"
+          dataKey="value"
+          stroke="#2563eb"
+          strokeWidth={2.5}
+          fill="url(#catFill)"
+          dot={{ r: 4, fill: '#2563eb', strokeWidth: 0 }}
+          activeDot={{ r: 6 }}
+        />
+      </AreaChart>
+    </ResponsiveContainer>
   )
 }

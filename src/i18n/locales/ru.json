@@ -1,0 +1,119 @@
+{
+  "nav": {
+    "dashboard": "Дашборд",
+    "orders": "Заказы",
+    "products": "Товары",
+    "other": "Другое",
+    "customers": "Клиенты"
+  },
+  "common": {
+    "search": "Поиск...",
+    "addProduct": "Добавить товар",
+    "addOrder": "Добавить заказ",
+    "addNew": "Добавить новое",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "edit": "Изменить",
+    "logout": "Выйти",
+    "results": "Результатов",
+    "show": "Показать",
+    "perPage": "на странице",
+    "filter": "Фильтр",
+    "newest": "Новые",
+    "oldest": "Старые",
+    "loading": "Загрузка...",
+    "notFound": "Ничего не найдено.",
+    "selectPlaceholder": "Выберите"
+  },
+  "login": {
+    "welcome": "Добро пожаловать в админ-панель",
+    "title": "Вход",
+    "username": "Имя пользователя",
+    "password": "Пароль",
+    "forgot": "Забыли пароль?",
+    "submit": "Войти",
+    "success": "Добро пожаловать!"
+  },
+  "dashboard": {
+    "title": "Дашборд",
+    "products": "Товары",
+    "customers": "Клиенты",
+    "categories": "Категории",
+    "brands": "Бренды",
+    "productsByCategory": "Товары по категориям",
+    "inventory": "Склад",
+    "recentCustomers": "Последние клиенты",
+    "topProducts": "Лучшие товары",
+    "name": "Имя",
+    "email": "Email",
+    "role": "Роль",
+    "noData": "Нет данных"
+  },
+  "products": {
+    "title": "Товары",
+    "product": "Товар",
+    "inventory": "Склад",
+    "category": "Категория",
+    "price": "Цена",
+    "action": "Действие",
+    "inStock": "в наличии",
+    "outOfStock": "Нет в наличии"
+  },
+  "orders": {
+    "title": "Заказы",
+    "empty": "Заказов пока нет",
+    "emptyHint": "Заказы будут отображаться здесь."
+  },
+  "categories": {
+    "categories": "Категории",
+    "brands": "Бренды",
+    "subCategories": "Подкатегории",
+    "colors": "Цвета",
+    "banners": "Баннеры",
+    "bannersPlaceholder": "Баннеры (API недоступен — placeholder)"
+  },
+  "customers": {
+    "title": "Клиенты",
+    "customer": "Клиент",
+    "email": "Email",
+    "phone": "Телефон",
+    "role": "Роль",
+    "searchUsername": "Поиск по имени пользователя..."
+  },
+  "form": {
+    "productName": "Название товара",
+    "code": "Код",
+    "price": "Цена",
+    "count": "Количество",
+    "brand": "Бренд",
+    "color": "Цвет",
+    "subCategory": "Подкатегория",
+    "description": "Описание",
+    "descriptionPlaceholder": "Описание товара...",
+    "hasDiscount": "Есть скидка",
+    "discountPrice": "Цена со скидкой",
+    "images": "Изображения",
+    "addProductTitle": "Добавить новый товар",
+    "editProductTitle": "Редактировать товар",
+    "categoryName": "Название категории",
+    "brandName": "Название бренда",
+    "imageRequired": "Пожалуйста, выберите изображение (обязательно).",
+    "imageHintEdit": "Изображение не меняется при редактировании.",
+    "information": "Информация",
+    "colour": "Цвет",
+    "uploadHint": "Нажмите для загрузки или перетащите файл",
+    "uploadFormats": "SVG, JPG, PNG (макс. 900×400)",
+    "successAdd": "Успешно добавлено",
+    "successAddMsg": "Хотите добавить новый товар в магазин?",
+    "goToProducts": "К товарам"
+  },
+  "confirm": {
+    "deleteItems": "Удалить элементы",
+    "deleteItemsMsg": "Вы уверены, что хотите удалить {{count}} элемент(ов)?",
+    "deleteCustomer": "Удалить клиента",
+    "deleteCustomerMsg": "Вы уверены, что хотите удалить этого клиента?",
+    "deleteItem": "Удалить элемент",
+    "deleteItemMsg": "Вы уверены, что хотите удалить \"{{name}}\"?"
+  }
+}

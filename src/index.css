@@ -1,11 +1,18 @@
 @import 'tailwindcss';
 
+/* Enable class-based dark mode: <html class="dark"> */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Fast Cart — brand design tokens (from Ecommerce mockups) */
 @theme {
   --color-sidebar: #111927;
   --color-sidebar-hover: #1d2939;
   --color-brand: #2563eb;
   --color-brand-hover: #1d4ed8;
+
+  /* Semantic surfaces — overridden in .dark below */
+  --color-bg: #f3f4f6;
+  --color-card: #ffffff;
   --color-ink: #111927;
   --color-muted: #6b7280;
   --color-line: #e5e7eb;
@@ -20,6 +27,16 @@
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
 }
 
+/* Dark theme — re-map the semantic tokens so token-based utilities flip. */
+.dark {
+  --color-bg: #0b1120;
+  --color-card: #111c33;
+  --color-ink: #e5e7eb;
+  --color-muted: #94a3b8;
+  --color-line: #25324d;
+  --color-surface: #1a2540;
+}
+
 html,
 body,
 #root {
@@ -28,7 +45,7 @@ body,
 
 body {
   margin: 0;
-  background-color: #f3f4f6;
+  background-color: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -43,4 +60,7 @@ body {
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
   border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
 }

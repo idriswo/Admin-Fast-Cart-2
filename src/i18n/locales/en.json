@@ -1,0 +1,119 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "orders": "Orders",
+    "products": "Products",
+    "other": "Other",
+    "customers": "Customers"
+  },
+  "common": {
+    "search": "Search...",
+    "addProduct": "Add product",
+    "addOrder": "Add order",
+    "addNew": "Add new",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "logout": "Log out",
+    "results": "Results",
+    "show": "Show",
+    "perPage": "per page",
+    "filter": "Filter",
+    "newest": "Newest",
+    "oldest": "Oldest",
+    "loading": "Loading...",
+    "notFound": "Nothing found.",
+    "selectPlaceholder": "Select"
+  },
+  "login": {
+    "welcome": "Welcome to admin panel",
+    "title": "Log in",
+    "username": "Username",
+    "password": "Password",
+    "forgot": "Forgot password?",
+    "submit": "Log in",
+    "success": "Welcome!"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "products": "Products",
+    "customers": "Customers",
+    "categories": "Categories",
+    "brands": "Brands",
+    "productsByCategory": "Products by Category",
+    "inventory": "Inventory",
+    "recentCustomers": "Recent Customers",
+    "topProducts": "Top products",
+    "name": "Name",
+    "email": "Email",
+    "role": "Role",
+    "noData": "No data"
+  },
+  "products": {
+    "title": "Products",
+    "product": "Product",
+    "inventory": "Inventory",
+    "category": "Category",
+    "price": "Price",
+    "action": "Action",
+    "inStock": "in stock",
+    "outOfStock": "Out of Stock"
+  },
+  "orders": {
+    "title": "Orders",
+    "empty": "No orders yet",
+    "emptyHint": "Orders will appear here."
+  },
+  "categories": {
+    "categories": "Categories",
+    "brands": "Brands",
+    "subCategories": "Sub categories",
+    "colors": "Colors",
+    "banners": "Banners",
+    "bannersPlaceholder": "Banners (API not available — placeholder)"
+  },
+  "customers": {
+    "title": "Customers",
+    "customer": "Customer",
+    "email": "Email",
+    "phone": "Phone",
+    "role": "Role",
+    "searchUsername": "Search by username..."
+  },
+  "form": {
+    "productName": "Product name",
+    "code": "Code",
+    "price": "Price",
+    "count": "Count",
+    "brand": "Brand",
+    "color": "Color",
+    "subCategory": "Sub category",
+    "description": "Description",
+    "descriptionPlaceholder": "Product description...",
+    "hasDiscount": "Has discount",
+    "discountPrice": "Discount price",
+    "images": "Images",
+    "addProductTitle": "Add new product",
+    "editProductTitle": "Edit product",
+    "categoryName": "Category name",
+    "brandName": "Brand name",
+    "imageRequired": "Please select an image (required).",
+    "imageHintEdit": "Image is not changed when editing.",
+    "information": "Information",
+    "colour": "Colour",
+    "uploadHint": "Click to upload or drag and drop",
+    "uploadFormats": "SVG, JPG, PNG (max 900×400)",
+    "successAdd": "Successfully add",
+    "successAddMsg": "Do you want to add new product to your store?",
+    "goToProducts": "Go to products"
+  },
+  "confirm": {
+    "deleteItems": "Delete Items",
+    "deleteItemsMsg": "Are you sure you want to delete {{count}} selected item(s)?",
+    "deleteCustomer": "Delete Customer",
+    "deleteCustomerMsg": "Are you sure you want to delete this customer?",
+    "deleteItem": "Delete Item",
+    "deleteItemMsg": "Are you sure you want to delete \"{{name}}\"?"
+  }
+}

@@ -8,14 +8,20 @@ import { toast } from '@/store/toast'
  */
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
-  headers: { 'Content-Type': 'application/json' },
 })
 
-// Request: attach the bearer token to every request.
+// Request: attach the bearer token, and set the right Content-Type per body type.
 api.interceptors.request.use((config) => {
   const token = useAuthStore.getState().token
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
+  }
+  // For FormData let axios/the browser set multipart + boundary automatically;
+  // otherwise default to JSON. Never force application/json on FormData.
+  if (config.data instanceof FormData) {
+    delete config.headers['Content-Type']
+  } else if (config.data && !config.headers['Content-Type']) {
+    config.headers['Content-Type'] = 'application/json'
   }
   return config
 })

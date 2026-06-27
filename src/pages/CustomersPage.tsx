@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Trash2, User, Search } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { PageHeader } from '@/components/shared/PageHeader'
 import { Pagination } from '@/components/shared/Pagination'
 import { ConfirmModal } from '@/components/shared/ConfirmModal'
@@ -10,6 +11,7 @@ import { getCustomers, deleteCustomer } from '@/services/customer.service'
 import type { UserProfile } from '@/types'
 
 export function CustomersPage() {
+  const { t } = useTranslation()
   const [customers, setCustomers] = useState<UserProfile[]>([])
   const [total, setTotal] = useState(0)
   const [loading, setLoading] = useState(true)
@@ -58,7 +60,7 @@ export function CustomersPage() {
 
   return (
     <div data-aos="fade-up">
-      <PageHeader title="Customers" />
+      <PageHeader title={t('customers.title')} />
 
       <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
         <div className="relative">
@@ -66,23 +68,23 @@ export function CustomersPage() {
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search by username..."
-            className="h-11 w-72 rounded-lg border border-line bg-white pl-3.5 pr-9 text-sm focus:border-brand focus:outline-none"
+            placeholder={t('customers.searchUsername')}
+            className="h-11 w-72 rounded-lg border border-line bg-card pl-3.5 pr-9 text-sm focus:border-brand focus:outline-none"
           />
         </div>
         <div className="flex flex-col">
-          <label className="mb-1 text-xs text-muted">Show</label>
+          <label className="mb-1 text-xs text-muted">{t('common.show')}</label>
           <select
             value={pageSize}
             onChange={(e) => {
               setPageSize(Number(e.target.value))
               setPage(1)
             }}
-            className="h-11 rounded-lg border border-line bg-white px-3 text-sm focus:border-brand focus:outline-none"
+            className="h-11 rounded-lg border border-line bg-card px-3 text-sm focus:border-brand focus:outline-none"
           >
-            <option value={10}>10 / page</option>
-            <option value={20}>20 / page</option>
-            <option value={50}>50 / page</option>
+            <option value={10}>10 / {t('common.perPage')}</option>
+            <option value={20}>20 / {t('common.perPage')}</option>
+            <option value={50}>50 / {t('common.perPage')}</option>
           </select>
         </div>
       </div>
@@ -90,15 +92,15 @@ export function CustomersPage() {
       {loading ? (
         <LoadingState />
       ) : (
-        <div className="overflow-x-auto rounded-xl border border-line bg-white">
+        <div className="overflow-x-auto rounded-xl border border-line bg-card">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-line text-left text-muted">
-                <th className="px-4 py-3 font-medium">Customer</th>
-                <th className="px-2 py-3 font-medium">Email</th>
-                <th className="px-2 py-3 font-medium">Phone</th>
-                <th className="px-2 py-3 font-medium">Role</th>
-                <th className="px-2 py-3 font-medium">Action</th>
+                <th className="px-4 py-3 font-medium">{t('customers.customer')}</th>
+                <th className="px-2 py-3 font-medium">{t('customers.email')}</th>
+                <th className="px-2 py-3 font-medium">{t('customers.phone')}</th>
+                <th className="px-2 py-3 font-medium">{t('customers.role')}</th>
+                <th className="px-2 py-3 font-medium">{t('products.action')}</th>
               </tr>
             </thead>
             <tbody>
@@ -158,7 +160,7 @@ export function CustomersPage() {
               {customers.length === 0 && (
                 <tr>
                   <td colSpan={5} className="px-4 py-10 text-center text-muted">
-                    Муштарӣ ёфт нашуд.
+                    {t('common.notFound')}
                   </td>
                 </tr>
               )}
@@ -176,8 +178,8 @@ export function CustomersPage() {
 
       <ConfirmModal
         open={!!toDelete}
-        title="Delete Customer"
-        message="Are you sure you want to delete this customer?"
+        title={t('confirm.deleteCustomer')}
+        message={t('confirm.deleteCustomerMsg')}
         loading={deleting}
         onCancel={() => setToDelete(null)}
         onConfirm={confirmDelete}

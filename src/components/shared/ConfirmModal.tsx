@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Modal } from '@/components/ui/Modal'
 import { Button } from '@/components/ui/Button'
 
@@ -19,6 +20,7 @@ export function ConfirmModal({
   onCancel,
   onConfirm,
 }: ConfirmModalProps) {
+  const { t } = useTranslation()
   return (
     <Modal
       open={open}
@@ -27,10 +29,10 @@ export function ConfirmModal({
       footer={
         <>
           <Button variant="primary" onClick={onCancel} disabled={loading}>
-            Cancel
+            {t('common.cancel')}
           </Button>
           <Button variant="danger-outline" onClick={onConfirm} disabled={loading}>
-            Delete
+            {t('common.delete')}
           </Button>
         </>
       }

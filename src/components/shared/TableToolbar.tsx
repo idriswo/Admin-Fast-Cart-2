@@ -1,4 +1,5 @@
 import { Search, Pencil, Trash2 } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 interface TableToolbarProps {
   search: string
@@ -14,6 +15,7 @@ export function TableToolbar({
   selectedCount,
   onBulkDelete,
 }: TableToolbarProps) {
+  const { t } = useTranslation()
   return (
     <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
       <div className="flex flex-wrap items-end gap-3">
@@ -22,15 +24,15 @@ export function TableToolbar({
           <input
             value={search}
             onChange={(e) => onSearch(e.target.value)}
-            placeholder="Search..."
-            className="h-11 w-64 rounded-lg border border-line bg-white pl-3.5 pr-9 text-sm focus:border-brand focus:outline-none"
+            placeholder={t('common.search')}
+            className="h-11 w-64 rounded-lg border border-line bg-card pl-3.5 pr-9 text-sm focus:border-brand focus:outline-none"
           />
         </div>
         <div className="flex flex-col">
-          <label className="mb-1 text-xs text-muted">Filter</label>
-          <select className="h-11 rounded-lg border border-line bg-white px-3 text-sm focus:border-brand focus:outline-none">
-            <option>Newest</option>
-            <option>Oldest</option>
+          <label className="mb-1 text-xs text-muted">{t('common.filter')}</label>
+          <select className="h-11 rounded-lg border border-line bg-card px-3 text-sm focus:border-brand focus:outline-none">
+            <option>{t('common.newest')}</option>
+            <option>{t('common.oldest')}</option>
           </select>
         </div>
       </div>

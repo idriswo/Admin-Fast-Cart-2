@@ -54,9 +54,8 @@ export async function addProduct(p: ProductPayload) {
   form.append('DiscountPrice', String(p.discountPrice ?? 0))
   p.images.forEach((file) => form.append('Images', file))
 
-  const { data } = await api.post('/Product/add-product', form, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-  })
+  // Let axios set Content-Type (incl. the multipart boundary) automatically.
+  const { data } = await api.post('/Product/add-product', form)
   return data
 }
 

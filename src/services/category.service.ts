@@ -11,9 +11,7 @@ export async function addCategory(payload: { name: string; image: File }) {
   const form = new FormData()
   form.append('CategoryName', payload.name)
   form.append('CategoryImage', payload.image)
-  const { data } = await api.post('/Category/add-category', form, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-  })
+  const { data } = await api.post('/Category/add-category', form)
   return data
 }
 
@@ -26,9 +24,7 @@ export async function updateCategory(payload: {
   form.append('Id', String(payload.id))
   form.append('CategoryName', payload.name)
   form.append('CategoryImage', payload.image)
-  const { data } = await api.put('/Category/update-category', form, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-  })
+  const { data } = await api.put('/Category/update-category', form)
   return data
 }
 
